@@ -37,6 +37,7 @@ namespace Kirja_luokka
 
         public string CompareBooks(BookStore book)
         {
+            string bookTitle = "Puhdistus";
 
             if (price > bookPrice)
             {
