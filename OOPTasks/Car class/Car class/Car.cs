@@ -26,9 +26,9 @@ namespace Car_class
             this.brand = userInput;
 
             Console.Write($"Syötä auton {this.brand} nopeus: ");
-            string userInput2 = Console.ReadLine();
+            string userInput2 = Console.ReadLine();            
 
-            if (!string.IsNullOrEmpty(userInput2))
+            if (int.TryParse(userInput2, out int speed))
             {
                 this.speed = int.Parse(userInput2);
             }
@@ -45,7 +45,7 @@ namespace Car_class
 
         public void Accelerate()
         {
-            Console.Write($"\nSyötä auton {this.brand} kiihtyvyys: ");
+            Console.Write($"\nSyötä autolle {this.brand} nopeutta: ");
             int speed2 = 0;
             string userInput2 = Console.ReadLine();
 
