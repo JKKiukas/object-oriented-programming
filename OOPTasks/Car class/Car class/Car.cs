@@ -49,7 +49,7 @@ namespace Car_class
             int speed2 = 0;
             string userInput2 = Console.ReadLine();
 
-            if (userInput2.Length > 0)
+            if (int.TryParse(userInput2, out int speed))
             {
                 speed2 = int.Parse(userInput2);
             }
