@@ -12,30 +12,22 @@ namespace Interface
         List<Product> products = new List<Product>();
         List<Customer> customers = new List<Customer>();
 
-        public Store(string name)
+        public Store()
         {
-            this.name = name;
+            name = string.Empty;
+            sales = 0;
         }
 
-        public Store(double sales)
-        {
-            this.sales = sales;
-        }
-
-        public Store(string name, double sales, List<Product> products, List<Customer> customers)
+        public Store(string name, double sales)
         {
             this.name = name;
             this.sales = sales;
+        }
+
+        public Store(List<Product> products, List<Customer> customers)
+        {
             this.products = products;
             this.customers = customers;
-        }
-
-        public Store(string name, int v) : this(name)
-        {
-        }
-
-        public Store(double sales, int v) : this(sales)
-        {
         }
 
         public override string ToString()

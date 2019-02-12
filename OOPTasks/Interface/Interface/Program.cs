@@ -40,7 +40,7 @@ namespace Interface
             Console.WriteLine($"Asiakkaan bonus: {thirdCustomer.CalculateBonus()}€\n");
             Console.WriteLine(new string('-', 33));
 
-            Store store = new Store("Kallen urheiluliike", 0);
+            Store store = new Store("Kallen urheiluliike", 500000);
 
             store.AddProduct(new Product("Sukset", 120.00, 100));
             store.AddProduct(new Product("Monot", 60.00, 100));
