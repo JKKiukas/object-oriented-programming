@@ -49,7 +49,7 @@ namespace Interface
             return ($"Yhteishinta: {totalValue}€\n");
         }
 
-        Product IProduct.GetProduct(string productName)
+        object IProduct.GetProduct(string productName)
         {
             throw new NotImplementedException();
         }

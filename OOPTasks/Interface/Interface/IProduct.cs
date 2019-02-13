@@ -6,7 +6,7 @@ namespace Interface
 {
     interface IProduct
     {
-        Product GetProduct(string productName);
+        object GetProduct(string productName);
         double CalculateTotal();
     }
 }

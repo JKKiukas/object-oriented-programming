@@ -58,12 +58,12 @@ namespace Interface
             }
         }
 
-        void ICustomer.GetCustomer(string customerName)
+        object ICustomer.GetCustomer(string customerName)
         {
             throw new NotImplementedException();
         }
 
-        void ICustomer.GetBonus()
+        double ICustomer.GetBonus()
         {
             throw new NotImplementedException();
         }
