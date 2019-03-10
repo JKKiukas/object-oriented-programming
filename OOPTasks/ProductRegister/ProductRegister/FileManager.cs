@@ -9,10 +9,11 @@ namespace ProductRegister
     class FileManager
     {
         private readonly string _file;
+        private List<Items> _itemsList;
 
-        public FileManager()
+        public FileManager(string _file)
         {
-            this._file = @"C:\temp\Items.json";
+            this._file = _file;
         }
 
         public string SortItems()
@@ -34,9 +35,9 @@ namespace ProductRegister
         {
             if (File.Exists(_file))
             {
-                List<Items> itemsList = JsonConvert.DeserializeObject<List<Items>>(File.ReadAllText(this._file));
+                _itemsList = JsonConvert.DeserializeObject<List<Items>>(File.ReadAllText(this._file));
 
-                foreach (Items items in itemsList)
+                foreach (Items items in _itemsList)
                 {                    
                     Console.WriteLine($"\nTuotteen nimi: {items.name}" +
                                       $"\nTuotteen numero: {items.id}" +
@@ -54,7 +55,7 @@ namespace ProductRegister
                     Console.Write("\nSyötä tuotenumero: ");
                     string idInput = Console.ReadLine();
 
-                    foreach (Items items in itemsList)
+                    foreach (Items items in _itemsList)
                     {
                         if(idInput == items.id)
                         {
@@ -95,9 +96,9 @@ namespace ProductRegister
 
         public string ArrangeProductGroup(string group)
         {
-            List<Items> itemsList = JsonConvert.DeserializeObject<List<Items>>(File.ReadAllText(this._file));
+            _itemsList = JsonConvert.DeserializeObject<List<Items>>(File.ReadAllText(this._file));
 
-            foreach (Items items in itemsList)
+            foreach (Items items in _itemsList)
             {
                 if (group == "1")
                 {
@@ -116,7 +117,7 @@ namespace ProductRegister
                 {
                     if (items.groupName == "Paperit ja lehtiöt")
                     {
-                        Console.WriteLine($"Tuotteen nimi: {items.name}" +
+                        Console.WriteLine($"\nTuotteen nimi: {items.name}" +
                                           $"\nTuotteen numero: {items.id}" +
                                           $"\nTuoteryhmä: {items.groupName}" +
                                           $"\nTuotteen hinta: {items.price}" +
@@ -129,7 +130,7 @@ namespace ProductRegister
                 {
                     if (items.groupName == "Kynät")
                     {
-                        Console.WriteLine($"Tuotteen nimi: {items.name}" +
+                        Console.WriteLine($"\nTuotteen nimi: {items.name}" +
                                           $"\nTuotteen numero: {items.id}" +
                                           $"\nTuoteryhmä: {items.groupName}" +
                                           $"\nTuotteen hinta: {items.price}" +
@@ -142,7 +143,7 @@ namespace ProductRegister
                 {
                     if (items.groupName == "Kortit ja kirjekuoret")
                     {
-                        Console.WriteLine($"Tuotteen nimi: {items.name}" +
+                        Console.WriteLine($"\nTuotteen nimi: {items.name}" +
                                           $"\nTuotteen numero: {items.id}" +
                                           $"\nTuoteryhmä: {items.groupName}" +
                                           $"\nTuotteen hinta: {items.price}" +
@@ -150,7 +151,7 @@ namespace ProductRegister
                                           $"\nKommentti tuotteesta: {items.comment}\n");
                     }
                 }
-
+                
                 else
                 {
                     return "\nVirheellinen syöte.\n" +
@@ -158,14 +159,15 @@ namespace ProductRegister
                 }
             }
 
+            Console.WriteLine("Paina ENTER-näppäintä palataksesi alkuun.");
             return "";
         }
 
         public void PrintOutOfStock()
         {
-            List<Items> itemsList = JsonConvert.DeserializeObject<List<Items>>(File.ReadAllText(this._file));
+            _itemsList = JsonConvert.DeserializeObject<List<Items>>(File.ReadAllText(this._file));
 
-            foreach (Items items in itemsList)
+            foreach (Items items in _itemsList)
             {
                 if (items.amount == 0)
                 {
@@ -184,10 +186,10 @@ namespace ProductRegister
         public void AddRemoveComment()
         {
             Console.WriteLine();
-            List<Items> itemsList = JsonConvert.DeserializeObject<List<Items>>(File.ReadAllText(this._file));
+            _itemsList = JsonConvert.DeserializeObject<List<Items>>(File.ReadAllText(this._file));
 
             int j = 0;
-            foreach (Items items in itemsList)
+            foreach (Items items in _itemsList)
             {
                 Console.WriteLine($"{j+1}. {items.name}");
                 j++;
@@ -198,7 +200,7 @@ namespace ProductRegister
             Console.WriteLine();
             bool isFound = false;
 
-            foreach (Items items in itemsList)
+            foreach (Items items in _itemsList)
             {
                 if (items.name == commentItem)
                 {
@@ -216,7 +218,7 @@ namespace ProductRegister
                         if (items.comment.Replace("   ", "") != userComment)
                         {
                             items.comment += userComment + "   ";
-                            File.WriteAllText(_file, JsonConvert.SerializeObject(itemsList));
+                            File.WriteAllText(_file, JsonConvert.SerializeObject(_itemsList));
                             Console.WriteLine("\nKommentin lisääminen onnistui.");
                             Console.WriteLine($"\nLisäsit kommentin: {userComment}");
                         }
@@ -232,7 +234,7 @@ namespace ProductRegister
                         Console.WriteLine("\nKommentin poistaminen onnistui.");
                         Console.WriteLine($"\nSeuraava kommentti poistettiin: {items.comment}");
                         items.comment = "";
-                        File.WriteAllText(_file, JsonConvert.SerializeObject(itemsList));
+                        File.WriteAllText(_file, JsonConvert.SerializeObject(_itemsList));
                     }
 
                     else

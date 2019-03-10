@@ -10,8 +10,8 @@ namespace ProductRegister
     {
         static void Main(string[] args)
         {
-            Items items = new Items();
-            FileManager fileManager = new FileManager();
+            string _file = @"C:\temp\Items.json";
+            FileManager fileManager = new FileManager(_file);
             ConsoleKeyInfo cki;
 
             do
@@ -50,6 +50,7 @@ namespace ProductRegister
 
                     default:
                         Console.WriteLine("Virheellinen syöte.");
+                        Console.WriteLine("Paina ENTER-näppäintä palataksesi alkuun");
                         break;
                 }
                 Console.ReadLine();
